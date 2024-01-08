@@ -1,0 +1,4 @@
+! DMZ, Router 7
+enable
+configure terminal
+hostname r7

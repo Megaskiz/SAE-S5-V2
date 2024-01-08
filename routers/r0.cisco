@@ -1,0 +1,89 @@
+! Site principal, Router 0
+enable
+config terminal
+hostname r0
+ipv6 unicast-routing
+! To r3
+interface GigabitEthernet0/0
+ no shutdown
+ ip address 10.0.10.1 255.255.255.252
+ ipv6 enable
+ ipv6 address fd00:10::1/64
+ ipv6 ospf 1 area 0
+ ip nat inside
+exit
+! To r2
+interface GigabitEthernet0/1
+ no shutdown
+ ip address 1.0.0.1 255.255.255.252
+ ipv6 enable
+ ipv6 address 2000:0:0:100::1/64
+ ipv6 ospf 1 area 0
+ ip nat outside
+exit
+! To s6
+interface GigabitEthernet0/2
+no shutdown
+exit
+! Serveur
+interface GigabitEthernet0/2.10
+ encapsulation dot1q 10
+ ip address 192.168.3.1 255.255.255.252
+ ipv6 enable
+ ipv6 address 2000:0:0:30::1/64
+ ipv6 ospf 1 area 0
+ ip nat inside
+ ip helper-address 192.168.3.2
+exit
+! Chef
+interface GigabitEthernet0/2.20
+ encapsulation dot1q 20
+ ip address 192.168.0.1 255.255.255.128
+ ipv6 enable
+ ipv6 address 2000:0:0:00::1/64
+ ipv6 ospf 1 area 0
+ ip nat inside 
+ ip helper-address 192.168.3.2
+exit
+! Employee
+interface GigabitEthernet0/2.30
+ encapsulation dot1q 30
+ ip address 192.168.0.129 255.255.255.128
+ ipv6 enable
+ ipv6 address 2000:0:0:01::1/64
+ ipv6 ospf 1 area 0
+ ip nat inside
+ ip helper-address 192.168.3.2
+exit
+! nat
+ access-list 1 permit 1.0.0.0 0.0.0.3
+ ip nat inside source list 1 interface GigabitEthernet0/0 overload 
+ ip nat outside source list 1 interface GigabitEthernet0/1 overload
+ ip nat inside source list 1 interface GigabitEthernet0/2 overload
+router ospf 1
+ network 10.0.10.0 0.0.0.3 area 0
+ network 192.168.0.0 0.0.0.127 area 0
+ network 192.168.0.128 0.0.0.127 area 0
+ network 192.168.3.0 0.0.0.3 area 0 
+ network 1.0.0.0 0.0.0.3 area 0
+exit
+ipv6 router ospf 1
+ router-id 1.1.1.0
+exit
+! BGP
+router bgp 1
+ bgp log-neighbor-changes
+ address-family ipv4
+  neighbor 1.0.0.2 remote-as 2
+  neighbor 1.0.0.2 activate
+ exit-address-family
+ address-family ipv6
+  neighbor 2000:0:0:100::2 remote-as 2
+  neighbor 2000:0:0:100::2 activate
+ exit-address-family
+ redistribute connected
+ redistribute ospf 1
+exit
+exit
+exit
+!
