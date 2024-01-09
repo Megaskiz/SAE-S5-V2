@@ -3,10 +3,13 @@ enable
 config terminal
 hostname r0
 ipv6 unicast-routing
+router ospf 2
+exit
 ! To r3
 interface GigabitEthernet0/0
  no shutdown
  ip address 10.0.10.1 255.255.255.252
+ ip ospf 2 area 2
  ipv6 enable
  ipv6 address fd00:10::1/64
  ipv6 ospf 1 area 0
@@ -55,6 +58,10 @@ interface GigabitEthernet0/2.30
  ip nat inside
  ip helper-address 192.168.3.2
 exit
+! MPLS
+interface Loopback0
+ ip address 7.7.7.7 255.255.255.255
+ ip ospf 2 area 2
 ! nat
  access-list 1 permit 1.0.0.0 0.0.0.3
  ip nat inside source list 1 interface GigabitEthernet0/0 overload 

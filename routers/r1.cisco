@@ -1,10 +1,10 @@
 ! Site 1, Router 1
 enable
 config terminal
-ip route 192.168.2.0 255.255.255.128 GigabitEthernet0/1
-ip route 192.168.2.128 255.255.255.128 GigabitEthernet0/1
 hostname r1
 ipv6 unicast-routing
+router ospf 2
+exit
 ! To switch top
 interface GigabitEthernet0/0
  no shutdown
@@ -29,10 +29,15 @@ exit
 interface GigabitEthernet0/1
  no shutdown
  ip address 10.0.70.1 255.255.255.252
+ ip ospf 2 area 2
  ipv6 enable
  ipv6 address fd00:70::1/64
  ipv6 ospf 1 area 0
 exit
+! MPLS
+interface Loopback0
+ ip address 1.1.1.1 255.255.255.255
+ ip ospf 2 area 2
 router ospf 1
  network 10.0.70.0 0.0.0.3 area 0
  network 192.168.1.0 0.0.0.127 area 0
