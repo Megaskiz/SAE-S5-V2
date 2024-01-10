@@ -52,7 +52,6 @@ interface Loopback0
  ip ospf 1 area 0
 exit
 router ospf 1
- network 10.0.10.0 0.0.0.3 area 0
  network 10.0.20.0 0.0.0.3 area 0
  network 10.0.40.0 0.0.0.3 area 0
  network 10.0.50.0 0.0.0.3 area 0

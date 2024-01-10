@@ -42,7 +42,6 @@ exit
 router ospf 1
  network 10.0.50.0 0.0.0.3 area 0
  network 10.0.60.0 0.0.0.3 area 0
- network 10.0.70.0 0.0.0.3 area 0
  mpls ldp autoconfig
 exit
 router bgp 65400

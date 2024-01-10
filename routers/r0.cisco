@@ -68,7 +68,6 @@ interface Loopback0
  ip nat outside source list 1 interface GigabitEthernet0/1 overload
  ip nat inside source list 1 interface GigabitEthernet0/2 overload
 router ospf 1
- network 10.0.10.0 0.0.0.3 area 0
  network 192.168.0.0 0.0.0.127 area 0
  network 192.168.0.128 0.0.0.127 area 0
  network 192.168.3.0 0.0.0.3 area 0 
