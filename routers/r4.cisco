@@ -54,7 +54,7 @@ router bgp 65400
  address-family ipv4 vrf MY-VRF
   redistribute ospf 2
 exit
-router ospf 2 [vrf MY-VRF]
+router ospf 2 vrf MY-VRF
  redistribute bgp 65400 subnets
 exit
 ipv6 router ospf 1
