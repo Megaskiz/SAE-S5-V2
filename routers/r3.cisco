@@ -6,6 +6,7 @@ ipv6 unicast-routing
 ip vrf MY-VRF
  rd 65400:1
  route-target both 64500:1
+exit
 ! To s9
 interface GigabitEthernet0/0
  no shutdown
@@ -49,6 +50,7 @@ exit
 interface Loopback0
  ip address 3.3.3.3 255.255.255.255
  ip ospf 1 area 0
+exit
 router ospf 1
  network 10.0.10.0 0.0.0.3 area 0
  network 10.0.20.0 0.0.0.3 area 0

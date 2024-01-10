@@ -3,14 +3,12 @@ enable
 config terminal
 hostname r1
 ipv6 unicast-routing
-router ospf 2
-exit
 ! To switch top
-interface GigabitEthernet0/0
+interface FastEthernet0/0
  no shutdown
 exit
 ! Chef
-interface GigabitEthernet0/0.20
+interface FastEthernet0/0.20
  encapsulation dot1q 20
  ip address 192.168.1.1 255.255.255.128
  ipv6 enable
@@ -18,7 +16,7 @@ interface GigabitEthernet0/0.20
  ipv6 ospf 1 area 0
 exit
 ! Employee
-interface GigabitEthernet0/0.30
+interface FastEthernet0/0.30
  encapsulation dot1q 30
  ip address 192.168.1.129 255.255.255.128
  ipv6 enable
@@ -26,7 +24,7 @@ interface GigabitEthernet0/0.30
  ipv6 ospf 1 area 0
 exit
 ! To r4
-interface GigabitEthernet0/1
+interface FastEthernet0/1
  no shutdown
  ip address 10.0.70.1 255.255.255.252
  ip ospf 2 area 2
@@ -38,6 +36,7 @@ exit
 interface Loopback0
  ip address 1.1.1.1 255.255.255.255
  ip ospf 2 area 2
+exit
 router ospf 1
  network 10.0.70.0 0.0.0.3 area 0
  network 192.168.1.0 0.0.0.127 area 0
