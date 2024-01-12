@@ -3,8 +3,6 @@ enable
 config terminal
 hostname r0
 ipv6 unicast-routing
-router ospf 2
-exit
 ! To r3
 interface GigabitEthernet0/0
  no shutdown
@@ -12,15 +10,16 @@ interface GigabitEthernet0/0
  ip ospf 2 area 2
  ipv6 enable
  ipv6 address fd00:10::1/64
- ipv6 ospf 1 area 0
+ ipv6 ospf 2 area 2
 exit
 ! To r2
 interface GigabitEthernet1/0
  no shutdown
  ip address 1.0.0.1 255.255.255.252
+ ip ospf 2 area 2
  ipv6 enable
  ipv6 address 2000:0:0:100::1/64
- ipv6 ospf 1 area 0
+ ipv6 ospf 2 area 2
 exit
 ! To s6
 interface GigabitEthernet2/0
@@ -30,41 +29,36 @@ exit
 interface GigabitEthernet2/0.10
  encapsulation dot1q 10
  ip address 192.168.3.1 255.255.255.252
+ ip ospf 2 area 2
  ipv6 enable
  ipv6 address 2000:0:0:30::1/64
- ipv6 ospf 1 area 0
+ ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
 ! Chef
 interface GigabitEthernet2/0.20
  encapsulation dot1q 20
  ip address 192.168.0.1 255.255.255.128
+ ip ospf 2 area 2
  ipv6 enable
  ipv6 address 2000:0:0:00::1/64
- ipv6 ospf 1 area 0
+ ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
 ! Employee
 interface GigabitEthernet2/0.30
  encapsulation dot1q 30
  ip address 192.168.0.129 255.255.255.128
+ ip ospf 2 area 2
  ipv6 enable
  ipv6 address 2000:0:0:01::1/64
- ipv6 ospf 1 area 0
+ ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
 ! MPLS
 interface Loopback0
  ip address 7.7.7.7 255.255.255.255
  ip ospf 2 area 2
-router ospf 1
- network 192.168.0.0 0.0.0.127 area 0
- network 192.168.0.128 0.0.0.127 area 0
- network 192.168.3.0 0.0.0.3 area 0 
- network 1.0.0.0 0.0.0.3 area 0
-exit
-ipv6 router ospf 1
- router-id 1.1.1.0
 exit
 ! BGP
 router bgp 1
