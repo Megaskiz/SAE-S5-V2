@@ -13,7 +13,6 @@ interface GigabitEthernet0/0
  ipv6 enable
  ipv6 address fd00:10::1/64
  ipv6 ospf 1 area 0
- ip nat inside
 exit
 ! To r2
 interface GigabitEthernet0/1
@@ -22,7 +21,6 @@ interface GigabitEthernet0/1
  ipv6 enable
  ipv6 address 2000:0:0:100::1/64
  ipv6 ospf 1 area 0
- ip nat outside
 exit
 ! To s6
 interface GigabitEthernet0/2
@@ -35,7 +33,6 @@ interface GigabitEthernet0/2.10
  ipv6 enable
  ipv6 address 2000:0:0:30::1/64
  ipv6 ospf 1 area 0
- ip nat inside
  ip helper-address 192.168.3.2
 exit
 ! Chef
@@ -45,7 +42,6 @@ interface GigabitEthernet0/2.20
  ipv6 enable
  ipv6 address 2000:0:0:00::1/64
  ipv6 ospf 1 area 0
- ip nat inside 
  ip helper-address 192.168.3.2
 exit
 ! Employee
@@ -55,18 +51,12 @@ interface GigabitEthernet0/2.30
  ipv6 enable
  ipv6 address 2000:0:0:01::1/64
  ipv6 ospf 1 area 0
- ip nat inside
  ip helper-address 192.168.3.2
 exit
 ! MPLS
 interface Loopback0
  ip address 7.7.7.7 255.255.255.255
  ip ospf 2 area 2
-! nat
- access-list 1 permit 1.0.0.0 0.0.0.3
- ip nat inside source list 1 interface GigabitEthernet0/0 overload 
- ip nat outside source list 1 interface GigabitEthernet0/1 overload
- ip nat inside source list 1 interface GigabitEthernet0/2 overload
 router ospf 1
  network 192.168.0.0 0.0.0.127 area 0
  network 192.168.0.128 0.0.0.127 area 0
