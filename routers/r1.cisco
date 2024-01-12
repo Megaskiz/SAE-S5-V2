@@ -24,7 +24,7 @@ interface FastEthernet0/0.30
  ipv6 ospf 1 area 0
 exit
 ! To r4
-interface FastEthernet0/1
+interface FastEthernet1/0
  no shutdown
  ip address 10.0.70.1 255.255.255.252
  ip ospf 2 area 2
