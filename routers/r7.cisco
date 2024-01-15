@@ -5,6 +5,7 @@ hostname r7
 ipv6 unicast-routing
 ! To s6
 interface FastEthernet0/0
+ no shutdown
  ip address 192.168.3.2 255.255.255.248
  ip ospf 2 area 2
  ipv6 enable
@@ -13,6 +14,7 @@ interface FastEthernet0/0
 exit
 ! To s10
 interface FastEthernet0/1
+ no shutdown
  ip address 192.168.3.3 255.255.255.248
  ip ospf 2 area 2
  ipv6 enable
