@@ -55,6 +55,16 @@ interface GigabitEthernet0/2.30
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
+! Wifi
+interface GigabitEthernet0/2.60
+ encapsulation dot1q 60
+ ip address 192.168.6.1 255.255.255.252
+ ip ospf 2 area 2
+ ipv6 enable
+ ipv6 address 2000:0:0:60::1/64
+ ipv6 ospf 2 area 2
+ ip helper-address 192.168.3.2
+exit
 ! MPLS
 interface Loopback0
  ip address 7.7.7.7 255.255.255.255
