@@ -39,6 +39,9 @@ interface Loopback0
  ip address 1.1.1.1 255.255.255.255
  ip ospf 2 area 2
 exit
+ipv6 router ospf 2
+ router-id 2.2.2.1
+exit
 exit
 exit
 !

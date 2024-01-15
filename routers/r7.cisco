@@ -19,4 +19,8 @@ interface FastEthernet0/1
  ipv6 address 2000:0:0:30::3/64
  ipv6 ospf 2 area 2
 exit
-
+ipv6 router ospf 2
+ router-id 2.2.2.7
+exit
+exit
+exit
