@@ -72,7 +72,7 @@ router bgp 1
   neighbor 2000:0:0:100::2 activate
  exit-address-family
  redistribute connected
- redistribute ospf 1
+ redistribute ospf 2
 exit
 exit
 exit
