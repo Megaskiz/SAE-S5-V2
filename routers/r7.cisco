@@ -24,5 +24,33 @@ exit
 ipv6 router ospf 2
  router-id 2.2.2.7
 exit
+!
+!ACL IN FA0/0
+access-list 101 permit tcp 192.168.0.0 0.0.3.255 any eq 22
+access-list 101 permit tcp 192.168.0.0 0.0.3.255 any eq 80
+access-list 101 permit tcp 192.168.0.0 0.0.3.255 any eq 443
+access-list 101 permit udp 192.168.0.0 0.0.3.255 any eq 53
+access-list 101 permit tcp 192.168.0.0 0.0.3.255 any eq 139
+access-list 101 permit tcp 192.168.0.0 0.0.3.255 any eq 445
+access-list 101 permit udp 192.168.0.0 0.0.3.255 any eq 67
+access-list 101 permit udp 192.168.0.0 0.0.3.255 any eq 68
+!
+ipv6 access-list ACL_IPV6
+ permit tcp 192.168.0.0/22 any eq 22
+ permit tcp 192.168.0.0/22 any eq 80
+ permit tcp 192.168.0.0/22 any eq 443
+ permit udp 192.168.0.0/22 any eq 53
+ permit tcp 192.168.0.0/22 any eq 139
+ permit tcp 192.168.0.0/22 any eq 445
+ permit udp 192.168.0.0/22 any eq 67
+ permit udp 192.168.0.0/22 any eq 68
+!
+exit
+!
+interface FastEthernet0/0
+ip access-group 101 in
+ipv6 traffic-filter ACL_IPV6 in
+!
+exit
 exit
 exit
