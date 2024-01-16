@@ -7,6 +7,7 @@ ipv6 unicast-routing
 interface FastEthernet0/0
  no shutdown
  ip address 192.168.3.2 255.255.255.252
+ !ip address dhcp
  ip ospf 2 area 2
  ipv6 enable
  ipv6 address 2000:0:0:30::2/64
