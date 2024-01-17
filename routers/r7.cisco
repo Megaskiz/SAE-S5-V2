@@ -21,6 +21,7 @@ interface FastEthernet0/1
  ipv6 address 2000:0:0:40::1/64
  ipv6 ospf 2 area 2
 exit
+!
 ipv6 router ospf 2
  router-id 2.2.2.7
 exit
@@ -48,9 +49,8 @@ ipv6 access-list ACL_IPV6
 exit
 !
 interface FastEthernet0/0
-ip access-group 101 in
-ipv6 traffic-filter ACL_IPV6 in
-!
+ ip access-group 101 in
+ ipv6 traffic-filter ACL_IPV6 in
 exit
 exit
 exit
