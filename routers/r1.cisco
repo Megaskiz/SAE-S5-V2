@@ -42,7 +42,7 @@ exit
 ipv6 router ospf 2
  router-id 2.2.2.1
 exit
-ip nat inside source route-map nonat interface FastEthernet1/0 overload
+ip nat inside source route-map nonat interface GigabitEthernet1/0 overload
 access-list 105 permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255  
 access-list 106 permit ip 192.168.1.0 0.0.0.255 192.168.0.0 0.0.0.255
 access-list 150 deny ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255  
