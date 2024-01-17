@@ -2,22 +2,6 @@ enable
 config terminal
 hostname r1
 ipv6 unicast-routing
-crypto isakmp policy 4  
- authentication pre-share
-exit
-crypto isakmp key xxxxxx1234 address 10.0.10.1 
-crypto isakmp key xxxxxx1234 address 1.0.0.2
-crypto ipsec transform-set encrypt-des esp-des
-crypto map combined 20 ipsec-isakmp  
- set peer 10.0.10.1 
- set transform-set encrypt-des  
- match address 106
-exit
-crypto map combined 30 ipsec-isakmp  
- set peer 1.0.0.2
- set transform-set encrypt-des  
- match address 105
-exit
 interface GigabitEthernet0/0
  no shutdown
  ip address 192.168.1.1 255.255.255.128
@@ -33,7 +17,6 @@ interface GigabitEthernet1/0
  ipv6 enable
  ipv6 address fd00:70::1/64
  ipv6 ospf 2 area 2
- crypto map combined
 exit
 interface Loopback0
  ip address 1.1.1.1 255.255.255.255
@@ -41,15 +24,6 @@ interface Loopback0
 exit
 ipv6 router ospf 2
  router-id 2.2.2.1
-exit
-ip nat inside source route-map nonat interface GigabitEthernet1/0 overload
-access-list 105 permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255  
-access-list 106 permit ip 192.168.1.0 0.0.0.255 192.168.0.0 0.0.0.255
-access-list 150 deny ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255  
-access-list 150 deny ip 192.168.1.0 0.0.0.255 192.168.0.0 0.0.0.255
-access-list 150 permit ip 192.168.1.0 0.0.0.255 any
-route-map nonat permit 10  
-  match ip address 150
 exit
 exit
 exit
