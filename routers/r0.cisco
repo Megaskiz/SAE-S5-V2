@@ -1,35 +1,23 @@
-! Site principal, Router 0
-!
 enable
 config terminal
-!
 hostname r0
-!
 ipv6 unicast-routing
-!
-! IPsec
 crypto isakmp policy 4  
  authentication pre-share
 exit
-!
 crypto isakmp key xxxxxx1234 address 10.0.70.1
 crypto isakmp key xxxxxx1234 address 1.0.0.2
-!
 crypto ipsec transform-set encrypt-des esp-des
-!
 crypto map combined 7 ipsec-isakmp  
  set peer 10.0.70.1 
  set transform-set encrypt-des  
  match address 106
 exit
-!
 crypto map combined 8 ipsec-isakmp  
  set peer 1.0.0.2 
  set transform-set encrypt-des  
  match address 105
 exit
-!
-! To r3
 interface GigabitEthernet0/0
  no shutdown
  ip address 10.0.10.1 255.255.255.252
@@ -39,8 +27,6 @@ interface GigabitEthernet0/0
  ipv6 ospf 2 area 2
  crypto map combined
 exit
-!
-! To r2
 interface GigabitEthernet1/0
  no shutdown
  ip address 1.0.0.1 255.255.255.252
@@ -50,13 +36,9 @@ interface GigabitEthernet1/0
  ipv6 ospf 2 area 2
  crypto map combined
 exit
-!
-! To s6
 interface GigabitEthernet2/0
  no shutdown
 exit
-!
-! Serveur
 interface GigabitEthernet2/0.10
  encapsulation dot1q 10
  ip address 192.168.3.1 255.255.255.252
@@ -66,8 +48,6 @@ interface GigabitEthernet2/0.10
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
-!
-! Chef
 interface GigabitEthernet2/0.20
  encapsulation dot1q 20
  ip address 192.168.0.1 255.255.255.128
@@ -77,8 +57,6 @@ interface GigabitEthernet2/0.20
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
-!
-! Employee
 interface GigabitEthernet2/0.30
  encapsulation dot1q 30
  ip address 192.168.0.129 255.255.255.128
@@ -88,8 +66,6 @@ interface GigabitEthernet2/0.30
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
-!
-! Wifi
 interface GigabitEthernet2/0.60
  encapsulation dot1q 60
  ip address 192.168.6.1 255.255.255.252
@@ -99,14 +75,10 @@ interface GigabitEthernet2/0.60
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
-!
-! MPLS
 interface Loopback0
  ip address 10.10.10.10 255.255.255.255
  ip ospf 2 area 2
 exit
-!
-! BGP
 router bgp 1
  bgp log-neighbor-changes
  address-family ipv4
@@ -120,31 +92,18 @@ router bgp 1
  redistribute connected
  redistribute ospf 2
 exit
-!
 ipv6 router ospf 2
  router-id 2.2.2.10
 exit
-!
-! Define traffic for NAT
 ip nat inside source route-map nonat interface GigabitEthernet0/0 overload
 ip nat inside source route-map nonat interface GigabitEthernet1/0 overload
-!
-! Access control list (ACL) that shows traffic to encrypt over the tunnel.
 access-list 105 permit ip 192.168.0.0 0.0.0.255 192.168.2.0 0.0.0.255  
 access-list 106 permit ip 192.168.0.0 0.0.0.255 192.168.1.0 0.0.0.255
-!
-! ACL to avoid the traffic through NAT over the tunnel. 
 access-list 150 deny ip 192.168.0.0 0.0.0.255 192.168.2.0 0.0.0.255  
 access-list 150 deny ip 192.168.0.0 0.0.0.255 192.168.1.0 0.0.0.255
-!
-! ACL to perform NAT on the traffic that does not go over the tunnel.
 access-list 150 permit ip 192.168.0.0 0.0.0.255 any
-!
-! Do not perform NAT on the IPSec traffic.
 route-map nonat permit 10  
   match ip address 150
 exit
-!
 exit
 exit
-!
