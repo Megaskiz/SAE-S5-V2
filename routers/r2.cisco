@@ -2,6 +2,30 @@ enable
 config terminal
 hostname r2
 ipv6 unicast-routing
+
+crypto isakmp enable
+crypto isakmp policy 2
+ encryption aes
+ authentication pre-share
+ hash sha
+ group 2
+ lifetime 86400
+exit
+crypto isakmp key 6 iutinfo address 1.0.0.1
+crypto ipsec transform-set my-set esp-aes esp-sha-hmac
+exit
+crypto ipsec security-association lifetime seconds 86400
+exit
+access-list 104 permit ip any any
+ipv6 access-list acl6
+ permit ipv6 any any
+exit
+crypto map my-map 2 ipsec-isakmp
+ match address 104 acl6
+ set peer 1.0.0.1
+ set transform-set my-set
+exit
+
 interface GigabitEthernet0/0
  no shutdown
  ip address 192.168.2.1 255.255.255.128
@@ -13,6 +37,7 @@ interface GigabitEthernet1/0
  ip address 1.0.0.2 255.255.255.252
  ipv6 enable
  ipv6 address 2000:0:0:100::2/64
+ crypto map my-map
 exit
 router bgp 2
  bgp log-neighbor-changes
