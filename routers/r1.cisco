@@ -20,21 +20,10 @@ crypto map combined 30 ipsec-isakmp
 exit
 interface GigabitEthernet0/0
  no shutdown
-exit
-interface GigabitEthernet0/0.20
- encapsulation dot1q 20
  ip address 192.168.1.1 255.255.255.128
  ip ospf 2 area 2
  ipv6 enable
  ipv6 address 2000:0:0:10::1/64
- ipv6 ospf 2 area 2
-exit
-interface GigabitEthernet0/0.30
- encapsulation dot1q 30
- ip address 192.168.1.129 255.255.255.128
- ip ospf 2 area 2
- ipv6 enable
- ipv6 address 2000:0:0:11::1/64
  ipv6 ospf 2 area 2
 exit
 interface GigabitEthernet1/0
