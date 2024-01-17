@@ -30,7 +30,7 @@ interface GigabitEthernet0/0.50
  ipv6 ospf 1 area 0
 exit
 ! To r0
-interface GigabitEthernet0/1
+interface GigabitEthernet1/0
  no shutdown
  ip vrf forwarding MY-VRF
  ip address 10.0.10.2 255.255.255.252
@@ -40,7 +40,7 @@ interface GigabitEthernet0/1
  ipv6 ospf 2 area 2
 exit
 ! To r5
-interface GigabitEthernet0/2
+interface GigabitEthernet2/0
  no shutdown
  ip address 10.0.20.2 255.255.255.252
  ip ospf 1 area 0

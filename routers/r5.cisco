@@ -13,7 +13,7 @@ interface GigabitEthernet0/0
  ipv6 ospf 1 area 0
 exit
 ! To r6
-interface GigabitEthernet0/1
+interface GigabitEthernet1/0
  no shutdown
  ip address 10.0.30.1 255.255.255.252
  ip ospf 1 area 0
@@ -22,7 +22,7 @@ interface GigabitEthernet0/1
  ipv6 ospf 1 area 0
 exit
 ! To r3
-interface GigabitEthernet0/2
+interface GigabitEthernet2/0
  no shutdown
  ip address 10.0.20.1 255.255.255.252
  ip ospf 1 area 0

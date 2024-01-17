@@ -30,12 +30,12 @@ crypto map combined 30 ipsec-isakmp
 exit
 !
 ! To switch top
-interface FastEthernet0/0
+interface GigabitEthernet0/0
  no shutdown
 exit
 !
 ! Chef
-interface FastEthernet0/0.20
+interface GigabitEthernet0/0.20
  encapsulation dot1q 20
  ip address 192.168.1.1 255.255.255.128
  ip ospf 2 area 2
@@ -45,7 +45,7 @@ interface FastEthernet0/0.20
 exit
 !
 ! Employee
-interface FastEthernet0/0.30
+interface GigabitEthernet0/0.30
  encapsulation dot1q 30
  ip address 192.168.1.129 255.255.255.128
  ip ospf 2 area 2
@@ -55,7 +55,7 @@ interface FastEthernet0/0.30
 exit
 !
 ! To r4
-interface FastEthernet0/1
+interface GigabitEthernet1/0
  no shutdown
  ip address 10.0.70.1 255.255.255.252
  ip ospf 2 area 2
@@ -76,7 +76,7 @@ ipv6 router ospf 2
 exit
 !
 ! Define traffic for NAT
-ip nat inside source route-map nonat interface FastEthernet0/1 overload
+ip nat inside source route-map nonat interface FastEthernet1/0 overload
 !
 ! Access control list (ACL) that shows traffic to encrypt over the tunnel.
 access-list 105 permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255  
