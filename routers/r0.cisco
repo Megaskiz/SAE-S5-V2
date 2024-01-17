@@ -38,9 +38,6 @@ interface GigabitEthernet1/0
 exit
 interface GigabitEthernet2/0
  no shutdown
-exit
-interface GigabitEthernet2/0.10
- encapsulation dot1q 10
  ip address 192.168.3.1 255.255.255.252
  ip ospf 2 area 2
  ipv6 enable
@@ -48,33 +45,7 @@ interface GigabitEthernet2/0.10
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
-interface GigabitEthernet2/0.20
- encapsulation dot1q 20
- ip address 192.168.0.1 255.255.255.128
- ip ospf 2 area 2
- ipv6 enable
- ipv6 address 2000:0:0:00::1/64
- ipv6 ospf 2 area 2
- ip helper-address 192.168.3.2
-exit
-interface GigabitEthernet2/0.30
- encapsulation dot1q 30
- ip address 192.168.0.129 255.255.255.128
- ip ospf 2 area 2
- ipv6 enable
- ipv6 address 2000:0:0:01::1/64
- ipv6 ospf 2 area 2
- ip helper-address 192.168.3.2
-exit
-interface GigabitEthernet2/0.60
- encapsulation dot1q 60
- ip address 192.168.6.1 255.255.255.252
- ip ospf 2 area 2
- ipv6 enable
- ipv6 address 2000:0:0:60::1/64
- ipv6 ospf 2 area 2
- ip helper-address 192.168.3.2
-exit
+
 interface Loopback0
  ip address 10.10.10.10 255.255.255.255
  ip ospf 2 area 2
