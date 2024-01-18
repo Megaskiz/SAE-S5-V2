@@ -1,17 +1,22 @@
-! WAN, Router 3
+!
 enable
 config terminal
+!
 hostname r3
+!
 ipv6 unicast-routing
+!
 ip vrf MY-VRF
  rd 65400:1
  route-target both 64500:1
 exit
+!
 ! To s9
 interface GigabitEthernet0/0
  no shutdown
 exit
-! to r6
+!
+! To r6
 interface GigabitEthernet0/0.40
  encapsulation dot1q 40
  ip address 10.0.40.1 255.255.255.252
@@ -20,7 +25,8 @@ interface GigabitEthernet0/0.40
  ipv6 address fd00:40::1/64
  ipv6 ospf 1 area 0
 exit
-! to r4
+!
+! To r4
 interface GigabitEthernet0/0.50
  encapsulation dot1q 50
  ip address 10.0.50.2 255.255.255.252
@@ -29,6 +35,7 @@ interface GigabitEthernet0/0.50
  ipv6 address fd00:50::2/64
  ipv6 ospf 1 area 0
 exit
+!
 ! To r0
 interface GigabitEthernet0/1
  no shutdown
@@ -39,6 +46,7 @@ interface GigabitEthernet0/1
  ipv6 address fd00:10::2/64
  ipv6 ospf 2 area 2
 exit
+!
 ! To r5
 interface GigabitEthernet0/2
  no shutdown
@@ -48,14 +56,17 @@ interface GigabitEthernet0/2
  ipv6 address fd00:20::2/64
  ipv6 ospf 1 area 0
 exit
+!
 ! MPLS
 interface Loopback0
  ip address 3.3.3.3 255.255.255.255
  ip ospf 1 area 0
 exit
+!
 router ospf 1
  mpls ldp autoconfig
 exit
+!
 router bgp 65400
  neighbor 4.4.4.4 remote-as 65400
  neighbor 4.4.4.4 update-source loopback 0
@@ -65,15 +76,19 @@ router bgp 65400
  address-family ipv4 vrf MY-VRF
   redistribute ospf 2
 exit
+!
 router ospf 2 vrf MY-VRF
  redistribute bgp 65400 subnets
 exit
+!
 ipv6 router ospf 1
  router-id 1.1.1.3
 exit
+!
 ipv6 router ospf 2
  router-id 2.2.2.3
 exit
+!
 exit
 exit
 !

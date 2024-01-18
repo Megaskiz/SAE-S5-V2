@@ -1,8 +1,41 @@
-! Site principal, Router 0
+!
 enable
-config terminal
+configure terminal
+!
 hostname r0
+!
 ipv6 unicast-routing
+!
+crypto isakmp enable
+!
+crypto isakmp policy 2
+ encryption aes
+ authentication pre-share
+ hash sha
+ group 2
+ lifetime 86400
+exit
+!
+crypto isakmp key 6 iutinfo address 1.0.0.2
+!
+crypto ipsec transform-set my-set esp-aes esp-sha-hmac
+exit
+!
+crypto ipsec security-association lifetime seconds 86400
+exit
+!
+access-list 104 permit ip any any
+!
+ipv6 access-list acl6
+ permit ipv6 any any
+exit
+!
+crypto map my-map 2 ipsec-isakmp
+ match address 104 acl6
+ set peer 1.0.0.2
+ set transform-set my-set
+exit
+!
 ! To r3
 interface GigabitEthernet0/0
  no shutdown
@@ -12,6 +45,7 @@ interface GigabitEthernet0/0
  ipv6 address fd00:10::1/64
  ipv6 ospf 2 area 2
 exit
+!
 ! To r2
 interface GigabitEthernet0/1
  no shutdown
@@ -20,11 +54,14 @@ interface GigabitEthernet0/1
  ipv6 enable
  ipv6 address 2000:0:0:100::1/64
  ipv6 ospf 2 area 2
+ crypto map my-map
 exit
+!
 ! To s6
 interface GigabitEthernet0/2
-no shutdown
+ no shutdown
 exit
+!
 ! Serveur
 interface GigabitEthernet0/2.10
  encapsulation dot1q 10
@@ -35,6 +72,7 @@ interface GigabitEthernet0/2.10
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
+!
 ! Chef
 interface GigabitEthernet0/2.20
  encapsulation dot1q 20
@@ -45,6 +83,7 @@ interface GigabitEthernet0/2.20
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
+!
 ! Employee
 interface GigabitEthernet0/2.30
  encapsulation dot1q 30
@@ -55,6 +94,7 @@ interface GigabitEthernet0/2.30
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
+!
 ! Wifi
 interface GigabitEthernet0/2.60
  encapsulation dot1q 60
@@ -65,12 +105,13 @@ interface GigabitEthernet0/2.60
  ipv6 ospf 2 area 2
  ip helper-address 192.168.3.2
 exit
+!
 ! MPLS
 interface Loopback0
  ip address 10.10.10.10 255.255.255.255
  ip ospf 2 area 2
 exit
-! BGP
+!
 router bgp 1
  bgp log-neighbor-changes
  address-family ipv4
@@ -84,9 +125,11 @@ router bgp 1
  redistribute connected
  redistribute ospf 2
 exit
+!
 ipv6 router ospf 2
  router-id 2.2.2.10
 exit
+!
 exit
 exit
 !
