@@ -1,13 +1,13 @@
-! WAN switch
+!
 enable
 configure terminal
 !
 vlan 40
-  name toR6
+  name TOR6
 exit
 !
 vlan 50
-  name ToR4
+  name TOR4
 exit
 !
 interface range FastEthernet0/1
