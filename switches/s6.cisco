@@ -1,4 +1,4 @@
-! Site principal switch
+!
 enable
 configure terminal
 !
@@ -7,15 +7,15 @@ vlan 10
 exit
 !
 vlan 20
-  name Responsables
+  name RESPONSABLE
 exit
 !
 vlan 30
-  name CM
+  name EMPLOYE
 exit
 !
 vlan 60
-  name Wifi
+  name WIFI
 exit
 !
 interface range FastEthernet0/1-3
