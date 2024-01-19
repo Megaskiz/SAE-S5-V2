@@ -22,7 +22,6 @@ crypto ipsec transform-set my-set esp-aes esp-sha-hmac
 exit
 !
 crypto ipsec security-association lifetime seconds 86400
-exit
 !
 access-list 104 permit ip any any
 !
