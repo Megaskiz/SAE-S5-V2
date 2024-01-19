@@ -30,7 +30,7 @@ ipv6 access-list acl6
 exit
 !
 crypto map my-map 2 ipsec-isakmp
- match address 104 acl6
+ match address 104
  set peer 1.0.0.2
  set transform-set my-set
 exit
