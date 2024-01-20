@@ -17,7 +17,7 @@ interface FastEthernet0/0
 exit
 !
 ! To s10
-interface FastEthernet0/1
+interface FastEthernet1/0
  no shutdown
  ip address 192.168.4.1 255.255.255.248
  ip ospf 2 area 2
