@@ -46,7 +46,7 @@ interface GigabitEthernet0/0
 exit
 !
 ! To r2
-interface GigabitEthernet0/1
+interface GigabitEthernet1/0
  no shutdown
  ip address 1.0.0.1 255.255.255.252
  ip ospf 2 area 2
@@ -57,12 +57,12 @@ interface GigabitEthernet0/1
 exit
 !
 ! To s6
-interface GigabitEthernet0/2
+interface GigabitEthernet2/0
  no shutdown
 exit
 !
 ! Serveur
-interface GigabitEthernet0/2.10
+interface GigabitEthernet2/0.10
  encapsulation dot1q 10
  ip address 192.168.3.1 255.255.255.252
  ip ospf 2 area 2
@@ -73,7 +73,7 @@ interface GigabitEthernet0/2.10
 exit
 !
 ! Chef
-interface GigabitEthernet0/2.20
+interface GigabitEthernet2/0.20
  encapsulation dot1q 20
  ip address 192.168.0.1 255.255.255.128
  ip ospf 2 area 2
@@ -84,7 +84,7 @@ interface GigabitEthernet0/2.20
 exit
 !
 ! Employee
-interface GigabitEthernet0/2.30
+interface GigabitEthernet2/0.30
  encapsulation dot1q 30
  ip address 192.168.0.129 255.255.255.128
  ip ospf 2 area 2
@@ -95,7 +95,7 @@ interface GigabitEthernet0/2.30
 exit
 !
 ! Wifi
-interface GigabitEthernet0/2.60
+interface GigabitEthernet2/0.60
  encapsulation dot1q 60
  ip address 192.168.6.1 255.255.255.252
  ip ospf 2 area 2
