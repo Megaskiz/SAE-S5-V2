@@ -11,33 +11,9 @@ ip vrf MY-VRF
  route-target both 64500:1
 exit
 !
-! To s9
-interface GigabitEthernet0/0
- no shutdown
-exit
-!
-! To r6
-interface GigabitEthernet0/0.40
- encapsulation dot1q 40
- ip address 10.0.40.1 255.255.255.252
- ip ospf 1 area 0
- ipv6 enable
- ipv6 address fd00:40::1/64
- ipv6 ospf 1 area 0
-exit
-!
-! To r4
-interface GigabitEthernet0/0.50
- encapsulation dot1q 50
- ip address 10.0.50.2 255.255.255.252
- ip ospf 1 area 0
- ipv6 enable
- ipv6 address fd00:50::2/64
- ipv6 ospf 1 area 0
-exit
-!
+
 ! To r0
-interface GigabitEthernet0/1
+interface GigabitEthernet1/0
  no shutdown
  ip vrf forwarding MY-VRF
  ip address 10.0.10.2 255.255.255.252
@@ -48,7 +24,7 @@ interface GigabitEthernet0/1
 exit
 !
 ! To r5
-interface GigabitEthernet0/2
+interface GigabitEthernet2/0
  no shutdown
  ip address 10.0.20.2 255.255.255.252
  ip ospf 1 area 0
