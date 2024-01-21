@@ -68,13 +68,6 @@ router ospf 2 vrf MY-VRF
  redistribute bgp 65400 subnets
 exit
 !
-router ospf 1
-router-id 1.1.1.4
-exit
-!
-router ospf 2
-router-id 2.2.2.4
-exit
 !
 ipv6 router ospf 1
  router-id 1.1.1.4
