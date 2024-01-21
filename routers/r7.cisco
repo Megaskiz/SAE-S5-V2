@@ -37,14 +37,14 @@ access-list 101 permit udp 192.168.0.0 0.0.3.255 any eq 67
 access-list 101 permit udp 192.168.0.0 0.0.3.255 any eq 68
 !
 ipv6 access-list ACL_IPV6
- permit tcp 192.168.0.0/22 any eq 22
- permit tcp 192.168.0.0/22 any eq 80
- permit tcp 192.168.0.0/22 any eq 443
- permit udp 192.168.0.0/22 any eq 53
- permit tcp 192.168.0.0/22 any eq 139
- permit tcp 192.168.0.0/22 any eq 445
- permit udp 192.168.0.0/22 any eq 67
- permit udp 192.168.0.0/22 any eq 68
+ permit tcp 2000::/64 any eq 22
+ permit tcp 2000::/64 any eq 80
+ permit tcp 2000::/64 any eq 443
+ permit udp 2000::/64 any eq 53
+ permit tcp 2000::/64 any eq 139
+ permit tcp 2000::/64 any eq 445
+ permit udp 2000::/64 any eq 67
+ permit udp 2000::/64 any eq 68
 !
 exit
 !
