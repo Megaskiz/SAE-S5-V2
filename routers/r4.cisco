@@ -63,12 +63,21 @@ router ospf 2 vrf MY-VRF
 exit
 !
 !
+ip router ospf 1
+ router-id 10.10.10.40
+exit
+!
+ip router ospf 2
+ router-id 20.20.20.40
+exit
+
+
 ipv6 router ospf 1
- router-id 1.1.1.4
+ router-id 14.14.14.44
 exit
 !
 ipv6 router ospf 2
- router-id 2.2.2.4
+ router-id 24.24.24.44
 exit
 !
 exit
