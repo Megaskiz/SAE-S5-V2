@@ -14,6 +14,7 @@ interface FastEthernet0/0
  ipv6 enable
  ipv6 address 2000:0:0:30::2/64
  ipv6 ospf 2 area 2
+ ip helper-address 192.168.4.2
 exit
 !
 ! To s10
