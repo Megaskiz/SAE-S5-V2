@@ -2,8 +2,14 @@
 enable
 configure terminal
 !
-interface range FastEthernet0/1
-  switchport trunk encapsulation dot1q
-  switchport mode trunk
+vlan 101
+  name HYPERVISEUR
 exit
+!
+vlan 100
+  name WIPHILOU
+exit
+!
+interface range GigabitEthernet0/1/0
+  switchport mode trunk  
 !
