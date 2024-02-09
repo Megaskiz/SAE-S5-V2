@@ -20,7 +20,7 @@ exit
 ! To s10
 interface FastEthernet0/1
  no shutdown
- ip address 192.168.4.1 255.255.255.248
+ ip address 192.168.4.1 255.255.255.240
  ip ospf 2 area 2
  ipv6 enable
  ipv6 address 2000:0:0:40::1/64
