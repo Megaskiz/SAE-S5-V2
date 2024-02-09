@@ -126,7 +126,7 @@ router bgp 1
  redistribute ospf 2
 exit
 !
-routeur ospf 2
+router ospf 2
  redistribute bgp 1 subnets
 exit
 !
